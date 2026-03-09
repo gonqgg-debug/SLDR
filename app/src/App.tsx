@@ -1,11 +1,13 @@
-import { useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail } from 'lucide-react';
+import { Mail, Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
@@ -39,9 +41,11 @@ function App() {
     return () => ctx.revert();
   }, []);
 
-  // Scroll-driven animations
+  // Scroll-driven animations (desktop only - mobile uses simple scroll)
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+      mm.add('(min-width: 768px)', () => {
       // Section 1: Hero exit animation
       ScrollTrigger.create({
         trigger: heroRef.current,
@@ -355,6 +359,7 @@ function App() {
           }
         });
       }
+      });
     }, mainRef);
 
     return () => ctx.revert();
@@ -366,9 +371,9 @@ function App() {
       <div className="grain-overlay" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-8 py-4 bg-white border-b border-black/5">
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-4 md:px-8 py-4 bg-white border-b border-black/5">
         <a href="#" className="flex items-center" aria-label="Senior Living DR">
-          <img src="/SLDR_logo.png" alt="Senior Living DR" className="h-8 w-auto" />
+          <img src="/SLDR_logo.png" alt="Senior Living DR" className="h-7 md:h-8 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-8">
           <a href="#platform" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
@@ -381,6 +386,26 @@ function App() {
             Contact
           </a>
         </div>
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild className="md:hidden p-2 -mr-2">
+            <button aria-label="Open menu" className="text-foreground">
+              <Menu className="w-6 h-6" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[280px] pt-12">
+            <nav className="flex flex-col gap-6">
+              <a href="#platform" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+                Platform
+              </a>
+              <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+                Strategy
+              </a>
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+                Contact
+              </a>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </nav>
 
       {/* Section 1: Hero */}
@@ -392,16 +417,16 @@ function App() {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="hero-gradient absolute inset-y-0 left-0 w-[62vw] gradient-overlay-left" />
+        <div className="hero-gradient absolute inset-y-0 left-0 w-full md:w-[62vw] gradient-overlay-left" />
         
-        <div className="hero-content absolute inset-0 flex flex-col justify-center px-[8vw]">
-          <div className="max-w-[46vw]">
-            <h1 className="hero-headline leading-[0.95] tracking-[-0.02em] mb-8"
-                style={{ fontSize: 'clamp(34px, 4.2vw, 60px)' }}>
+        <div className="hero-content absolute inset-0 flex flex-col justify-center px-5 md:px-[8vw]">
+          <div className="max-w-full md:max-w-[46vw]">
+            <h1 className="hero-headline leading-[0.95] tracking-[-0.02em] mb-6 md:mb-8"
+                style={{ fontSize: 'clamp(28px, 6vw, 60px)' }}>
               <span className="inline-block font-heading-serif text-foreground">Senior Living</span><br />
               <span className="inline-block font-heading-serif italic text-[#b8953e]">Dominican Republic</span>
             </h1>
-            <div className="hero-body space-y-4 text-black text-base leading-relaxed mb-8 max-w-lg">
+            <div className="hero-body space-y-3 md:space-y-4 text-black text-sm md:text-base leading-relaxed mb-6 md:mb-8 max-w-lg">
               <p>We're establishing the foundation for institutional-grade senior living communities in the Dominican Republic.</p>
               <p>Through our investment platform, we're creating opportunities for investors, residents, and operators to participate in the Caribbean's emerging active adult living sector.</p>
             </div>
@@ -410,7 +435,7 @@ function App() {
       </section>
 
       {/* Section 2: Platform & Approach */}
-      <section ref={section2Ref} id="platform" className="relative w-screen h-screen overflow-hidden z-20">
+      <section ref={section2Ref} id="platform" className="relative w-screen min-h-screen md:h-screen overflow-hidden z-20">
         <div className="absolute inset-0">
           <img 
             src="/garden_path.jpg" 
@@ -420,15 +445,15 @@ function App() {
         </div>
         <div className="absolute inset-0 bg-background/40" />
 
-        <div className="s2-headline absolute top-[10vh] left-1/2 -translate-x-1/2 text-center">
+        <div className="s2-headline absolute top-[5vh] md:top-[10vh] left-1/2 -translate-x-1/2 text-center w-[90vw] md:w-auto px-4">
           <p className="eyebrow mb-3">The Platform</p>
           <h2 className="font-heading-serif font-bold text-foreground leading-tight tracking-[-0.02em]"
-              style={{ fontSize: 'clamp(28px, 3.2vw, 48px)' }}>
+              style={{ fontSize: 'clamp(22px, 5vw, 48px)' }}>
             A comprehensive approach to senior living.
           </h2>
         </div>
 
-        <div className="absolute top-[26vh] left-[6vw] w-[42vw] h-[56vh]">
+        <div className="absolute top-[22vh] left-[6vw] w-[42vw] h-[56vh] hidden md:block">
           <div className="s2-card-left relative w-full h-full card-rounded overflow-hidden card-shadow">
             <img 
               src="/poolside_relaxation.jpg" 
@@ -446,7 +471,7 @@ function App() {
           </div>
         </div>
 
-        <div className="absolute top-[26vh] right-[6vw] w-[42vw] h-[56vh]">
+        <div className="absolute top-[26vh] right-[6vw] w-[42vw] h-[56vh] hidden md:block">
           <div className="s2-card-right relative w-full h-full card-rounded overflow-hidden card-shadow">
             <img 
               src="/modern_villa.jpg" 
@@ -463,10 +488,44 @@ function App() {
             </div>
           </div>
         </div>
+
+        {/* Mobile: stacked cards */}
+        <div className="md:hidden absolute inset-0 flex flex-col pt-[18vh] pb-20 px-4 gap-4 overflow-y-auto">
+          <div className="s2-card-left relative w-full aspect-[4/3] card-rounded overflow-hidden card-shadow flex-shrink-0">
+            <img 
+              src="/poolside_relaxation.jpg" 
+              alt="Resort-style living" 
+              className="w-full h-full object-cover"
+            />
+            <div className="s2-card-text absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Resident-Centered Design
+              </h3>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Communities designed to support independence while providing access to care and services as needs evolve.
+              </p>
+            </div>
+          </div>
+          <div className="s2-card-right relative w-full aspect-[4/3] card-rounded overflow-hidden card-shadow flex-shrink-0">
+            <img 
+              src="/modern_villa.jpg" 
+              alt="Modern architecture" 
+              className="w-full h-full object-cover"
+            />
+            <div className="s2-card-text absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Purpose-Built Infrastructure
+              </h3>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Architecture and amenities engineered for operational efficiency and long-term asset value.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Section 3: Market Opportunity */}
-      <section ref={section3Ref} className="relative w-screen h-screen overflow-hidden z-30">
+      <section ref={section3Ref} className="relative w-screen min-h-screen overflow-hidden z-30">
         <div className="absolute inset-0">
           <img 
             src="/61NLMTPoXPOF0NyNiqLdx.png" 
@@ -476,14 +535,14 @@ function App() {
         </div>
         <div className="absolute inset-0 bg-background/40" />
 
-        <div className="s3-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[86vw] h-[62vh] card-rounded overflow-hidden card-shadow flex items-center">
+        <div className="s3-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] md:w-[86vw] h-[70vh] md:h-[62vh] card-rounded overflow-hidden card-shadow flex items-center">
           <img 
             src="/ScrZvNZq07uVOd6J_TgCG.png" 
             alt="" 
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          <div className="s3-text relative z-10 px-[6%] py-[10%] max-w-[50%]">
+          <div className="s3-text relative z-10 px-5 md:px-[6%] py-6 md:py-[10%] max-w-full md:max-w-[50%]">
             <p className="font-heading-serif italic text-[#b8953e] text-xl md:text-2xl mb-4">Market Opportunity</p>
             <p className="text-white/80 text-base leading-relaxed">
               We focus on Dominicans, Americans, and Canadians living in the USA who already love the Dominican Republic—a proven country with more than 11 million tourists per year. Our communities appeal to retirees from these areas seeking quality senior living in a destination they know and trust.
@@ -493,7 +552,7 @@ function App() {
       </section>
 
       {/* Section 4: Strategy & Operations */}
-      <section ref={section4Ref} id="strategy" className="relative w-screen h-screen overflow-hidden z-40">
+      <section ref={section4Ref} id="strategy" className="relative w-screen min-h-screen md:h-screen overflow-hidden z-40">
         <div className="absolute inset-0">
           <img 
             src="/wellness_interior.jpg" 
@@ -503,15 +562,15 @@ function App() {
         </div>
         <div className="absolute inset-0 bg-background/50" />
 
-        <div className="s4-headline absolute top-[10vh] left-1/2 -translate-x-1/2 text-center">
+        <div className="s4-headline absolute top-[5vh] md:top-[10vh] left-1/2 -translate-x-1/2 text-center w-[90vw] md:w-auto px-4">
           <p className="eyebrow mb-3">Investment Strategy</p>
           <h2 className="font-heading-serif font-bold text-foreground leading-tight tracking-[-0.02em]"
-              style={{ fontSize: 'clamp(28px, 3.2vw, 48px)' }}>
+              style={{ fontSize: 'clamp(22px, 5vw, 48px)' }}>
             Disciplined execution. Long-term value.
           </h2>
         </div>
 
-        <div className="absolute top-[26vh] left-[6vw] w-[42vw] h-[56vh]">
+        <div className="absolute top-[26vh] left-[6vw] w-[42vw] h-[56vh] hidden md:block">
           <div className="s4-card-left relative w-full h-full card-rounded overflow-hidden card-shadow">
             <img 
               src="/resort_pool_dusk.jpg" 
@@ -529,7 +588,7 @@ function App() {
           </div>
         </div>
 
-        <div className="absolute top-[26vh] right-[6vw] w-[42vw] h-[56vh]">
+        <div className="absolute top-[26vh] right-[6vw] w-[42vw] h-[56vh] hidden md:block">
           <div className="s4-card-right relative w-full h-full card-rounded overflow-hidden card-shadow bg-[#11130E] border border-white/10">
             <div className="s4-card-text absolute inset-0 flex flex-col justify-center p-8">
               <div className="w-12 h-1 bg-accent mb-6" />
@@ -543,10 +602,40 @@ function App() {
             </div>
           </div>
         </div>
+
+        <div className="md:hidden absolute inset-0 flex flex-col pt-[18vh] pb-20 px-4 gap-4 overflow-y-auto">
+          <div className="s4-card-left relative w-full aspect-[4/3] card-rounded overflow-hidden card-shadow flex-shrink-0">
+            <img 
+              src="/resort_pool_dusk.jpg" 
+              alt="Amenities" 
+              className="w-full h-full object-cover"
+            />
+            <div className="s4-card-text absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Integrated Service Model
+              </h3>
+              <p className="text-white/80 text-sm leading-relaxed">
+                On-site wellness, care coordination, and lifestyle services designed to optimize occupancy and resident retention.
+              </p>
+            </div>
+          </div>
+          <div className="s4-card-right relative w-full min-h-[200px] card-rounded overflow-hidden card-shadow bg-[#11130E] border border-white/10 flex-shrink-0">
+            <div className="s4-card-text absolute inset-0 flex flex-col justify-center p-6">
+              <div className="w-12 h-1 bg-accent mb-4" />
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Institutional Partnerships
+              </h3>
+              <p className="text-white/70 text-sm leading-relaxed">
+                We work with established operators, healthcare providers, and local stakeholders to ensure 
+                regulatory compliance, operational excellence, and sustainable returns.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Section 5: Team & Governance */}
-      <section ref={section5Ref} className="relative w-screen h-screen overflow-hidden z-50">
+      <section ref={section5Ref} className="relative w-screen min-h-screen md:h-screen overflow-hidden z-50">
         <div className="absolute inset-0">
           <img 
             src="/building_exterior.jpg" 
@@ -556,15 +645,15 @@ function App() {
         </div>
         <div className="absolute inset-0 bg-background/40" />
 
-        <div className="s5-headline absolute top-[10vh] left-1/2 -translate-x-1/2 text-center">
+        <div className="s5-headline absolute top-[5vh] md:top-[10vh] left-1/2 -translate-x-1/2 text-center w-[90vw] md:w-auto px-4">
           <p className="eyebrow mb-3">Leadership</p>
           <h2 className="font-heading-serif font-bold text-foreground leading-tight tracking-[-0.02em]"
-              style={{ fontSize: 'clamp(28px, 3.2vw, 48px)' }}>
+              style={{ fontSize: 'clamp(22px, 5vw, 48px)' }}>
             Experience across real estate, senior care, and operations.
           </h2>
         </div>
 
-        <div className="absolute top-[24vh] left-[6vw] w-[42vw] h-[60vh]">
+        <div className="absolute top-[24vh] left-[6vw] w-[42vw] h-[60vh] hidden md:block">
           <div className="s5-card-left relative w-full h-full card-rounded overflow-hidden card-shadow">
             <img 
               src="/residents_community.jpg" 
@@ -583,7 +672,7 @@ function App() {
           </div>
         </div>
 
-        <div className="absolute top-[24vh] right-[6vw] w-[42vw] h-[60vh]">
+        <div className="absolute top-[24vh] right-[6vw] w-[42vw] h-[60vh] hidden md:block">
           <div className="s5-card-right relative w-full h-full card-rounded overflow-hidden card-shadow">
             <img 
               src="/wellness_scene.jpg" 
@@ -601,23 +690,58 @@ function App() {
             </div>
           </div>
         </div>
+
+        <div className="md:hidden absolute inset-0 flex flex-col pt-[18vh] pb-20 px-4 gap-4 overflow-y-auto">
+          <div className="s5-card-left relative w-full aspect-[4/3] card-rounded overflow-hidden card-shadow flex-shrink-0">
+            <img 
+              src="/residents_community.jpg" 
+              alt="Community" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Operator-Led Development
+              </h3>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Our leadership team brings decades of combined experience in senior living operations, 
+                real estate development, and healthcare management.
+              </p>
+            </div>
+          </div>
+          <div className="s5-card-right relative w-full aspect-[4/3] card-rounded overflow-hidden card-shadow flex-shrink-0">
+            <img 
+              src="/wellness_scene.jpg" 
+              alt="Wellness" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="font-heading-serif font-semibold text-white text-lg mb-2">
+                Governance & Transparency
+              </h3>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Institutional reporting standards, regular investor communications, and a commitment 
+                to ethical business practices.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Section 6: Differentiation (Flowing) */}
-      <section ref={section6Ref} className="relative w-full min-h-screen bg-background py-[10vh] z-60">
-        <div className="s6-headline text-center mb-16">
+      <section ref={section6Ref} className="relative w-full min-h-screen bg-background py-12 md:py-[10vh] z-60">
+        <div className="s6-headline text-center mb-10 md:mb-16 px-4">
           <p className="eyebrow mb-3">Competitive Positioning</p>
           <h2 className="font-heading-serif font-bold text-foreground leading-tight tracking-[-0.02em]"
-              style={{ fontSize: 'clamp(28px, 3.2vw, 48px)' }}>
+              style={{ fontSize: 'clamp(22px, 5vw, 48px)' }}>
             What sets us apart.
           </h2>
         </div>
 
-        <div className="relative px-[6vw]">
-          <div className="flex gap-[4vw]">
+        <div className="relative px-4 md:px-[6vw]">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-[4vw]">
             {/* Card A - Location */}
-            <div className="s6-card-a w-[28vw] mt-[6vh]">
-              <div className="relative h-[54vh] card-rounded overflow-hidden card-shadow card-hover mb-4">
+            <div className="s6-card-a w-full md:w-[28vw] md:mt-[6vh]">
+              <div className="relative h-[50vw] md:h-[54vh] min-h-[220px] card-rounded overflow-hidden card-shadow card-hover mb-4">
                 <img 
                   src="/beach_access.jpg" 
                   alt="Strategic locations" 
@@ -634,8 +758,8 @@ function App() {
             </div>
 
             {/* Card B - Design */}
-            <div className="s6-card-b w-[28vw]">
-              <div className="relative h-[54vh] card-rounded overflow-hidden card-shadow card-hover mb-4">
+            <div className="s6-card-b w-full md:w-[28vw]">
+              <div className="relative h-[50vw] md:h-[54vh] min-h-[220px] card-rounded overflow-hidden card-shadow card-hover mb-4">
                 <img 
                   src="/interior_design.jpg" 
                   alt="Design standards" 
@@ -652,8 +776,8 @@ function App() {
             </div>
 
             {/* Card C - Team */}
-            <div className="s6-card-c w-[28vw] mt-[6vh]">
-              <div className="relative h-[54vh] card-rounded overflow-hidden card-shadow card-hover mb-4">
+            <div className="s6-card-c w-full md:w-[28vw] md:mt-[6vh]">
+              <div className="relative h-[50vw] md:h-[54vh] min-h-[220px] card-rounded overflow-hidden card-shadow card-hover mb-4">
                 <img 
                   src="/team_hospitality.jpg" 
                   alt="Professional management" 
@@ -681,13 +805,13 @@ function App() {
             className="w-full h-full object-cover opacity-50"
           />
         </div>
-        <div className="absolute inset-y-0 left-0 w-[70vw] gradient-overlay-dark-left" />
+        <div className="absolute inset-y-0 left-0 w-full md:w-[70vw] gradient-overlay-dark-left" />
 
-        <div className="s7-content relative z-10 flex flex-col justify-center min-h-screen px-[8vw] py-[18vh]">
-          <div className="max-w-[44vw]">
+        <div className="s7-content relative z-10 flex flex-col justify-center min-h-screen px-5 md:px-[8vw] py-24 md:py-[18vh]">
+          <div className="max-w-full md:max-w-[44vw]">
             <p className="eyebrow text-white/60 mb-4">Contact</p>
             <h2 className="font-heading-serif font-bold text-white leading-tight tracking-[-0.02em] mb-4"
-                style={{ fontSize: 'clamp(28px, 3.2vw, 48px)' }}>
+                style={{ fontSize: 'clamp(22px, 5vw, 48px)' }}>
               For investor and partnership inquiries.
             </h2>
             <p className="text-white/70 text-base leading-relaxed mb-8">
@@ -706,14 +830,12 @@ function App() {
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 px-[8vw] py-6 border-t border-white/10">
-          <div className="flex items-center justify-between">
-            <p className="text-white/50 text-sm">
+        <div className="absolute bottom-0 left-0 right-0 px-5 md:px-[8vw] py-6 border-t border-white/10">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-0 items-center md:items-start md:justify-between text-center md:text-left">
+            <p className="text-white/50 text-xs md:text-sm">
               © 2026 Senior Living Dominican Republic
             </p>
-            <div className="flex items-center gap-6">
-              <span className="text-white/50 text-sm">Punta Cana • Santo Domingo</span>
-            </div>
+            <span className="text-white/50 text-xs md:text-sm">Punta Cana • Santo Domingo</span>
           </div>
         </div>
       </section>
