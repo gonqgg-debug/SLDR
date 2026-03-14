@@ -126,7 +126,9 @@ function switchTab(tab,btn){
 }
 window.sldrSwitchTab=switchTab;
 
-document.addEventListener('DOMContentLoaded',function(){
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',function(){initMap()});
+}else{
   initMap();
-});
+}
 })();
