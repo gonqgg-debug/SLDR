@@ -382,6 +382,9 @@ function App() {
           <a href="#strategy" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
             Strategy
           </a>
+          <a href="/investors.html" className="font-mono text-xs uppercase tracking-[0.12em] px-4 py-2 bg-[#b8953e] text-white hover:bg-[#c9a54a] transition-colors rounded-sm">
+            Investors
+          </a>
           <a href="#contact" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
             Contact
           </a>
@@ -400,6 +403,9 @@ function App() {
               <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
                 Strategy
               </a>
+              <a href="/investors.html" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] inline-block px-4 py-2 bg-[#b8953e] text-white rounded-sm w-fit">
+                Investors
+              </a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
                 Contact
               </a>
@@ -414,7 +420,7 @@ function App() {
           <img 
             src="/hero_lifestyle.jpg" 
             alt="Senior living in the Caribbean" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_40%] md:object-center"
           />
         </div>
         <div className="hero-gradient absolute inset-y-0 left-0 w-full md:w-[62vw] gradient-overlay-left" />
@@ -798,11 +804,11 @@ function App() {
 
       {/* Section 7: Contact (Flowing) */}
       <section ref={section7Ref} id="contact" className="relative w-full min-h-screen bg-[#11130E] overflow-hidden z-70">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 contact-bg">
           <img 
             src="/contact_lifestyle.jpg" 
             alt="Contact" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover object-[center_35%] md:object-center opacity-50"
           />
         </div>
         <div className="absolute inset-y-0 left-0 w-full md:w-[70vw] gradient-overlay-dark-left" />
