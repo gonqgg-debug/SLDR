@@ -36,6 +36,7 @@
 .sldr-nav-right{display:flex;align-items:center;gap:20px}
 .sldr-nav-cta{font-family:var(--ff-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;background:var(--carbon);color:#fff;text-decoration:none;border-radius:2px}
 .sldr-nav-cta:hover{background:var(--carbon-mid)}
+.sldr-nav-lock:hover{color:var(--carbon)!important}
 
 .sldr-cover{
   padding:80px 60px 72px;
@@ -319,6 +320,66 @@
 .leaflet-popup-close-button{color:var(--carbon-faint)!important}
 .leaflet-popup-close-button:hover{color:var(--carbon)!important}
 
+/* ── ACCESS GATE ── */
+#sldr-gate{
+  position:fixed;inset:0;background:var(--carbon);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+}
+#sldr-gate::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 40%,rgba(196,146,42,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.sldr-gate-logo{
+  font-family:var(--ff-serif);font-size:22px;font-weight:500;
+  letter-spacing:0.02em;color:var(--cream);margin-bottom:48px;
+  opacity:0;animation:sldrFadeIn 0.8s ease forwards 0.2s;
+}
+.sldr-gate-logo span{color:var(--gold)}
+.sldr-gate-box{
+  width:100%;max-width:380px;padding:0 24px;
+  opacity:0;animation:sldrFadeIn 0.8s ease forwards 0.5s;
+}
+.sldr-gate-title{
+  font-family:var(--ff-serif);font-size:28px;font-weight:400;
+  line-height:1.2;margin-bottom:8px;text-align:center;color:var(--cream);
+}
+.sldr-gate-title em{font-style:italic;color:var(--gold)}
+.sldr-gate-sub{
+  font-size:13px;color:rgba(250,247,242,0.4);text-align:center;
+  margin-bottom:36px;line-height:1.7;
+}
+.sldr-gate-field{
+  width:100%;background:rgba(250,247,242,0.05);
+  border:1px solid rgba(250,247,242,0.1);
+  padding:14px 18px;font-family:var(--ff-mono);font-size:16px;
+  letter-spacing:0.22em;color:var(--cream);text-align:center;
+  outline:none;transition:all 0.15s;margin-bottom:14px;
+  border-radius:2px;text-transform:uppercase;box-sizing:border-box;
+}
+.sldr-gate-field::placeholder{color:rgba(250,247,242,0.2);letter-spacing:0.1em;font-size:13px;text-transform:none}
+.sldr-gate-field:focus{border-color:var(--gold);background:rgba(196,146,42,0.04)}
+.sldr-gate-btn{
+  width:100%;background:var(--gold);color:var(--carbon);
+  border:none;padding:14px 24px;font-family:var(--ff-sans);
+  font-size:13px;font-weight:500;letter-spacing:0.06em;
+  text-transform:uppercase;cursor:pointer;transition:all 0.15s;border-radius:2px;
+}
+.sldr-gate-btn:hover{background:var(--gold-light)}
+.sldr-gate-error{
+  font-size:12px;color:#E24B4A;text-align:center;margin-top:12px;
+  height:18px;font-family:var(--ff-mono);letter-spacing:0.05em;
+}
+.sldr-gate-footer{
+  font-size:11px;color:rgba(250,247,242,0.2);margin-top:40px;
+  text-align:center;font-family:var(--ff-mono);letter-spacing:0.08em;
+}
+.sldr-gate-footer a{color:rgba(196,146,42,0.5);text-decoration:none}
+.sldr-gate-footer a:hover{color:var(--gold)}
+@keyframes sldrFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sldrGateExit{to{opacity:0;pointer-events:none}}
+#sldr-app{display:none}
+
 @media(max-width:768px){
   .sldr-nav,.sldr-cover,.sldr-framework-section,.sldr-map-header,.sldr-city-analysis,.sldr-phase-section,.sldr-demo-section,.sldr-deck-cta{padding-left:20px;padding-right:20px}
   .sldr-rule{margin:0 20px}
@@ -339,10 +400,27 @@
 </head>
 <body class="sldr-wrap sldr-root">
 
+<!-- ACCESS GATE -->
+<div id="sldr-gate">
+  <div class="sldr-gate-logo">SL<span>|</span>DR</div>
+  <div class="sldr-gate-box">
+    <h1 class="sldr-gate-title">Members <em>Intelligence</em></h1>
+    <p class="sldr-gate-sub">Restricted access for investors and strategic partners.<br>Enter your access code to continue.</p>
+    <input class="sldr-gate-field" id="sldr-gateInput" type="password" placeholder="Access code" maxlength="20" autocomplete="off">
+    <button class="sldr-gate-btn" onclick="sldrCheckAccess()">Access</button>
+    <p class="sldr-gate-error" id="sldr-gateError"></p>
+    <p class="sldr-gate-footer">No access? <a href="mailto:gq@seniorlivingdr.com">gq@seniorlivingdr.com</a></p>
+  </div>
+</div>
+
+<!-- MAIN APP (hidden until unlocked) -->
+<div id="sldr-app">
+
 <nav class="sldr-nav">
   <a href="/" class="sldr-nav-logo">SL<span>|</span>DR</a>
   <div class="sldr-nav-right">
     <a href="/" class="sldr-nav-cta">Back to site</a>
+    <button type="button" class="sldr-nav-lock" onclick="sldrLockApp()" style="background:none;border:none;font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--carbon-faint);cursor:pointer;padding:0">Lock ⟶</button>
   </div>
 </nav>
 
@@ -733,7 +811,57 @@
   </div>
 </div>
 
+</div><!-- /#sldr-app -->
+
+<script>
+// ── ACCESS GATE ──
+var sldrAccessCode = 'SLDR2025';
+
+function sldrCheckAccess() {
+  var val = (document.getElementById('sldr-gateInput').value || '').trim().toUpperCase();
+  if (val === sldrAccessCode) {
+    document.getElementById('sldr-gate').style.animation = 'sldrGateExit 0.4s ease forwards';
+    setTimeout(function() {
+      document.getElementById('sldr-gate').style.display = 'none';
+      document.getElementById('sldr-app').style.display = 'block';
+      sldrLoadIntel();
+    }, 400);
+    sessionStorage.setItem('sldr_access', '1');
+  } else {
+    document.getElementById('sldr-gateError').textContent = 'Incorrect code. Contact gq@seniorlivingdr.com';
+    document.getElementById('sldr-gateInput').style.borderColor = '#E24B4A';
+    setTimeout(function() {
+      document.getElementById('sldr-gateError').textContent = '';
+      document.getElementById('sldr-gateInput').style.borderColor = '';
+    }, 3000);
+  }
+}
+
+document.getElementById('sldr-gateInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') sldrCheckAccess();
+});
+
+function sldrLockApp() {
+  sessionStorage.removeItem('sldr_access');
+  document.getElementById('sldr-app').style.display = 'none';
+  document.getElementById('sldr-gate').style.cssText = 'display:flex';
+  document.getElementById('sldr-gateInput').value = '';
+}
+
+function sldrLoadIntel() {
+  if (window.sldrIntelLoaded) return;
+  window.sldrIntelLoaded = true;
+  var s = document.createElement('script');
+  s.src = '/market-intelligence.js';
+  document.body.appendChild(s);
+}
+
+if (sessionStorage.getItem('sldr_access')) {
+  document.getElementById('sldr-gate').style.display = 'none';
+  document.getElementById('sldr-app').style.display = 'block';
+  sldrLoadIntel();
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="/market-intelligence.js"></script>
 </body>
 </html>
