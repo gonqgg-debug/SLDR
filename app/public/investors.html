@@ -859,9 +859,13 @@ function sldrLoadIntel() {
 if (sessionStorage.getItem('sldr_access')) {
   document.getElementById('sldr-gate').style.display = 'none';
   document.getElementById('sldr-app').style.display = 'block';
-  sldrLoadIntel();
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+if (sessionStorage.getItem('sldr_access')) {
+  sldrLoadIntel();
+}
+</script>
 </body>
 </html>
