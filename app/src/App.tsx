@@ -822,12 +822,12 @@ function App() {
                 Caribbean Retirement, Clearly Explained
               </h2>
             </div>
-            <a href="/blog/" className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors link-underline whitespace-nowrap">
+            <a href="/blog/index.html" className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors link-underline whitespace-nowrap">
               All articles →
             </a>
           </div>
 
-          <a href="/blog/retiring-in-dominican-republic" className="group flex flex-col md:flex-row gap-0 border border-black/8 hover:border-[#b8953e] transition-colors bg-white">
+          <a href="/blog/retiring-in-dominican-republic.html" className="group flex flex-col md:flex-row gap-0 border border-black/8 hover:border-[#b8953e] transition-colors bg-white">
             <div className="md:w-[380px] shrink-0 overflow-hidden" style={{ minHeight: '220px' }}>
               <img
                 src="/KfYAwUWciFne_5umHPq5H.png"
