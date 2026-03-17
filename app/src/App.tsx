@@ -398,22 +398,25 @@ function App() {
               <Menu className="w-6 h-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] pt-12">
-            <nav className="flex flex-col gap-6">
-              <a href="#platform" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+          <SheetContent side="right" className="w-[260px] p-0 gap-0 flex flex-col">
+            <div className="flex items-center px-6 h-[57px] border-b border-black/5 shrink-0">
+              <img src="/SLDR_logo.png" alt="Senior Living DR" className="h-7 w-auto" />
+            </div>
+            <nav className="flex flex-col px-6 py-8 gap-1">
+              <a href="#platform" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Platform
               </a>
-              <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+              <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Strategy
               </a>
-              <a href="/blog/" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+              <a href="/blog/" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Journal
               </a>
-              <a href="/investors.html" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] inline-block px-4 py-2 bg-[#b8953e] text-white rounded-sm w-fit">
-                Investors
-              </a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Contact
+              </a>
+              <a href="/investors.html" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] mt-6 px-5 py-3 bg-[#b8953e] text-white hover:bg-[#c9a54a] transition-colors text-center" style={{borderRadius:'2px'}}>
+                Investors
               </a>
             </nav>
           </SheetContent>
