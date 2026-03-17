@@ -811,6 +811,53 @@ function App() {
         </div>
       </section>
 
+      {/* Journal Section */}
+      <section className="relative w-full bg-[#FAF7F2] border-t border-black/5 z-70">
+        <div className="px-5 md:px-[8vw] py-16 md:py-20">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <p className="eyebrow mb-2">From the Journal</p>
+              <h2 className="font-heading-serif font-semibold text-foreground leading-tight tracking-[-0.02em]"
+                  style={{ fontSize: 'clamp(22px, 3.5vw, 36px)' }}>
+                Caribbean Retirement, Clearly Explained
+              </h2>
+            </div>
+            <a href="/blog/" className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors link-underline whitespace-nowrap">
+              All articles →
+            </a>
+          </div>
+
+          <a href="/blog/retiring-in-dominican-republic" className="group flex flex-col md:flex-row gap-0 border border-black/8 hover:border-[#b8953e] transition-colors bg-white">
+            <div className="md:w-[380px] shrink-0 overflow-hidden" style={{ minHeight: '220px' }}>
+              <img
+                src="/KfYAwUWciFne_5umHPq5H.png"
+                alt="Retiring in the Dominican Republic"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                style={{ minHeight: '220px' }}
+              />
+            </div>
+            <div className="flex flex-col justify-between p-7 md:p-10">
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#C4922A]">Caribbean Retirement</span>
+                  <span className="font-mono text-[10px] tracking-[0.06em] text-muted-foreground/60">March 2026 · 12 min read</span>
+                </div>
+                <h3 className="font-heading-serif font-semibold text-foreground leading-snug mb-3"
+                    style={{ fontSize: 'clamp(18px, 2vw, 24px)' }}>
+                  Retiring in the Dominican Republic: The Caribbean Dream That Finally Makes Sense
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  For decades, retirees chose Costa Rica, Panama, or Mexico. A new wave is discovering what those in the know have kept quiet: the DR offers more warmth, more culture, and a stronger dollar.
+                </p>
+              </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#C4922A] mt-6 flex items-center gap-2">
+                Read article <span>→</span>
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* Section 7: Contact (Flowing) */}
       <section ref={section7Ref} id="contact" className="relative w-full min-h-screen bg-[#11130E] overflow-hidden z-70">
         <div className="absolute inset-0 contact-bg">
