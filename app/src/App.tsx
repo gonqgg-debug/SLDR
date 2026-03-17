@@ -382,6 +382,9 @@ function App() {
           <a href="#strategy" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
             Strategy
           </a>
+          <a href="/blog/" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
+            Journal
+          </a>
           <a href="/investors.html" className="font-mono text-xs uppercase tracking-[0.12em] px-4 py-2 bg-[#b8953e] text-white hover:bg-[#c9a54a] transition-colors rounded-sm">
             Investors
           </a>
@@ -402,6 +405,9 @@ function App() {
               </a>
               <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
                 Strategy
+              </a>
+              <a href="/blog/" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] text-foreground">
+                Journal
               </a>
               <a href="/investors.html" onClick={() => setMobileMenuOpen(false)} className="font-mono text-sm uppercase tracking-[0.12em] inline-block px-4 py-2 bg-[#b8953e] text-white rounded-sm w-fit">
                 Investors

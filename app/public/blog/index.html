@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — Senior Living DR</title>
+<meta name="description" content="Insights on Caribbean retirement, senior living in the Dominican Republic, and the emerging active adult living sector.">
+<link rel="canonical" href="https://www.seniorlivingdr.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.seniorlivingdr.com/blog/">
+<meta property="og:title" content="Journal — Senior Living DR">
+<meta property="og:description" content="Insights on Caribbean retirement, senior living in the Dominican Republic, and the emerging active adult living sector.">
+<meta property="og:image" content="https://www.seniorlivingdr.com/hero_lifestyle.jpg">
+<meta property="og:site_name" content="Senior Living DR">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#FAF7F2; --cream-deep:#F4EFE6; --cream-dark:#EDE5D8;
+  --gold:#C4922A; --gold-light:#D4A84B; --gold-pale:#F8F0DE; --gold-border:rgba(196,146,42,0.2);
+  --carbon:#1C1C1A; --carbon-mid:#3A3A38; --carbon-light:#6B6B68; --carbon-faint:#9E9E9A;
+  --border:rgba(28,28,26,0.09);
+  --ff-serif:'Playfair Display',Georgia,serif;
+  --ff-sans:'DM Sans',system-ui,sans-serif;
+  --ff-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16px;line-height:1.7}
+
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo img{height:32px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--carbon-light);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--carbon)}
+.nav-links a.btn{background:var(--gold);color:var(--carbon);padding:8px 18px;border-radius:2px;font-weight:500}
+.nav-links a.btn:hover{background:var(--gold-light)}
+
+.page-header{padding:72px 48px 56px;background:var(--cream);border-bottom:1px solid var(--border)}
+.page-header-inner{max-width:900px;margin:0 auto}
+.page-eyebrow{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.page-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.page-title{font-family:var(--ff-serif);font-size:clamp(36px,5vw,60px);font-weight:500;line-height:1.06;color:var(--carbon);margin-bottom:14px}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-desc{font-size:16px;color:var(--carbon-light);max-width:520px;line-height:1.8}
+
+.posts-section{max-width:900px;margin:0 auto;padding:56px 48px 80px}
+
+.post-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);margin-bottom:24px;text-decoration:none;color:inherit;transition:border-color .15s;background:#fff}
+.post-card:hover{border-color:var(--gold)}
+.post-card-img{overflow:hidden;height:100%;min-height:200px}
+.post-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;display:block}
+.post-card:hover .post-card-img img{transform:scale(1.03)}
+.post-card-body{padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between}
+.post-card-meta{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.post-card-tag{font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.post-card-date{font-family:var(--ff-mono);font-size:10px;letter-spacing:.06em;color:var(--carbon-faint)}
+.post-card-title{font-family:var(--ff-serif);font-size:clamp(20px,2.4vw,26px);font-weight:500;line-height:1.18;color:var(--carbon);margin-bottom:12px}
+.post-card-excerpt{font-size:14px;color:var(--carbon-light);line-height:1.75;margin-bottom:20px}
+.post-card-read{font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px}
+.post-card-read::after{content:'→'}
+
+.empty-notice{padding:48px;text-align:center;color:var(--carbon-faint);font-family:var(--ff-mono);font-size:12px;letter-spacing:.08em;border:1px dashed var(--border);margin-top:8px}
+
+@media(max-width:640px){
+  .nav{padding:14px 20px}
+  .page-header{padding:48px 20px 40px}
+  .posts-section{padding:40px 20px 60px}
+  .post-card{grid-template-columns:1fr}
+  .post-card-img{min-height:180px}
+  .nav-links .hide-mobile{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo" aria-label="Senior Living DR">
+    <img src="/SLDR_logo.png" alt="Senior Living DR">
+  </a>
+  <div class="nav-links">
+    <a href="/#platform" class="hide-mobile">Platform</a>
+    <a href="/#strategy" class="hide-mobile">Strategy</a>
+    <a href="/blog/" class="active">Journal</a>
+    <a href="/investors.html" class="btn">Investors</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">SL|DR Journal</p>
+    <h1 class="page-title">Caribbean Retirement, <em>Clearly Explained</em></h1>
+    <p class="page-desc">Insights on retiring in the Dominican Republic, senior living infrastructure, and the emerging active adult living sector across the Caribbean.</p>
+  </div>
+</div>
+
+<div class="posts-section">
+
+  <a href="/blog/retiring-in-dominican-republic" class="post-card">
+    <div class="post-card-img">
+      <img src="/beach_access.jpg" alt="Retiring in the Dominican Republic">
+    </div>
+    <div class="post-card-body">
+      <div>
+        <div class="post-card-meta">
+          <span class="post-card-tag">Caribbean Retirement</span>
+          <span class="post-card-date">March 2026</span>
+        </div>
+        <h2 class="post-card-title">Retiring in the Dominican Republic: The Caribbean Dream That Finally Makes Sense</h2>
+        <p class="post-card-excerpt">For decades, retirees chose Costa Rica, Panama, or Mexico. A new wave is discovering what those in the know have kept quiet: the DR offers more warmth, more culture, and a stronger dollar — with institutional-grade senior living now on the horizon.</p>
+      </div>
+      <span class="post-card-read">Read article</span>
+    </div>
+  </a>
+
+</div>
+
+</body>
+</html>
