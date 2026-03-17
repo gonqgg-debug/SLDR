@@ -544,7 +544,10 @@ body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16
       <p class="lead-sub">Join our priority interest list. Be the first to receive information on residences, pricing, and community life — before public launch.</p>
 
       <!-- Replace YOUR_FORM_ID with your Formspree form ID -->
-      <form class="lead-form" id="leadForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="lead-form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="e60dc9a3-2c03-488b-9277-34da65a54540">
+        <input type="hidden" name="subject" value="New Interest List Signup — SL|DR Punta Cana">
+        <input type="hidden" name="redirect" value="false">
         <div class="lead-row">
           <input class="lead-input lead-input--light" type="text" name="first_name" placeholder="First name" required>
           <input class="lead-input lead-input--light" type="text" name="last_name" placeholder="Last name" required>
