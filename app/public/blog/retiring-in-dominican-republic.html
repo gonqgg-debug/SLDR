@@ -191,6 +191,35 @@ body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16
 .tag{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--carbon-faint);text-decoration:none;transition:all .15s}
 .tag:hover{border-color:var(--gold);color:var(--gold)}
 
+/* LEAD CAPTURE WIDGET */
+.lead-widget{background:#2A2318;position:relative;overflow:hidden}
+.lead-widget-inner{max-width:740px;margin:0 auto;padding:72px 24px 56px;position:relative;z-index:2}
+.lead-widget-bg-circle{position:absolute;right:-80px;top:-60px;width:340px;height:340px;border:1px solid rgba(196,146,42,0.15);border-radius:50%;pointer-events:none;z-index:1}
+.lead-eyebrow{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.lead-title{font-family:var(--ff-serif);font-size:clamp(24px,3.5vw,38px);font-weight:500;line-height:1.15;color:#FAF7F2;margin-bottom:12px}
+.lead-sub{font-size:14px;color:rgba(250,247,242,0.45);line-height:1.75;margin-bottom:32px;max-width:540px}
+.lead-form{display:flex;flex-direction:column;gap:12px}
+.lead-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lead-input{width:100%;padding:14px 18px;font-family:var(--ff-sans);font-size:14px;border:none;border-radius:6px;outline:none;transition:box-shadow .15s;appearance:none;-webkit-appearance:none}
+.lead-input--light{background:#fff;color:var(--carbon)}
+.lead-input--light::placeholder{color:var(--carbon-faint)}
+.lead-input--light:focus{box-shadow:0 0 0 2px var(--gold)}
+.lead-input--dark{background:rgba(255,255,255,0.07);color:rgba(250,247,242,0.75);cursor:pointer}
+.lead-input--dark:focus{box-shadow:0 0 0 2px var(--gold)}
+.lead-input--dark option{background:#2A2318;color:#FAF7F2}
+.lead-btn{margin-top:4px;background:none;border:none;font-family:var(--ff-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,0.45);cursor:pointer;padding:12px 0;text-align:center;transition:color .15s}
+.lead-btn:hover{color:var(--gold)}
+.lead-privacy{font-family:var(--ff-mono);font-size:10px;letter-spacing:.06em;color:rgba(250,247,242,0.2);text-align:center;margin-top:4px}
+.lead-success{text-align:center;padding:40px 0}
+.lead-success-icon{font-family:var(--ff-serif);font-size:32px;color:var(--gold);margin-bottom:20px}
+.lead-success-title{font-family:var(--ff-serif);font-size:28px;font-weight:400;color:#FAF7F2;margin-bottom:10px}
+.lead-success-sub{font-size:14px;color:rgba(250,247,242,0.45);line-height:1.75;max-width:420px;margin:0 auto}
+.lead-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(250,247,242,0.06)}
+.lead-stat{padding:24px 32px;border-right:1px solid rgba(250,247,242,0.06);background:var(--cream)}
+.lead-stat:last-child{border-right:none}
+.lead-stat-label{display:block;font-family:var(--ff-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.lead-stat-val{display:block;font-family:var(--ff-serif);font-size:22px;font-weight:400;color:var(--carbon)}
+
 /* RESPONSIVE */
 @media(max-width:680px){
   .nav{padding:14px 20px}
@@ -202,6 +231,11 @@ body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16
   .stats-grid{grid-template-columns:1fr 1fr}
   .cta-section{padding:48px 20px}
   .nav-links .hide-mobile{display:none}
+  .lead-widget-inner{padding:48px 20px 40px}
+  .lead-row{grid-template-columns:1fr}
+  .lead-stats{grid-template-columns:1fr}
+  .lead-stat{border-right:none;border-bottom:1px solid rgba(250,247,242,0.06)}
+  .lead-stat:last-child{border-bottom:none}
 }
 </style>
 </head>
@@ -499,6 +533,69 @@ body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16
 
 </div><!-- /article-wrap -->
 
+<!-- LEAD CAPTURE WIDGET -->
+<div class="lead-widget">
+  <div class="lead-widget-inner">
+    <div class="lead-widget-bg-circle"></div>
+
+    <div id="lead-form-wrap">
+      <p class="lead-eyebrow">Senior Living DR · Punta Cana</p>
+      <h2 class="lead-title">Interested in Retiring in the Dominican Republic?</h2>
+      <p class="lead-sub">Join our priority interest list. Be the first to receive information on residences, pricing, and community life — before public launch.</p>
+
+      <!-- Replace YOUR_FORM_ID with your Formspree form ID -->
+      <form class="lead-form" id="leadForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="lead-row">
+          <input class="lead-input lead-input--light" type="text" name="first_name" placeholder="First name" required>
+          <input class="lead-input lead-input--light" type="text" name="last_name" placeholder="Last name" required>
+        </div>
+        <input class="lead-input lead-input--light" type="email" name="email" placeholder="Email address" required>
+        <select class="lead-input lead-input--dark" name="profile">
+          <option value="" disabled selected>I am a… (select your profile)</option>
+          <option value="american_retiree">American retiree or pre-retiree</option>
+          <option value="veteran">U.S. military veteran</option>
+          <option value="dominican_diaspora">Dominican-American returning home</option>
+          <option value="canadian_retiree">Canadian retiree</option>
+          <option value="european_retiree">European retiree</option>
+          <option value="investor">Investor / financial partner</option>
+          <option value="other">Other</option>
+        </select>
+        <select class="lead-input lead-input--dark" name="timeline">
+          <option value="" disabled selected>My retirement timeline is…</option>
+          <option value="already_retired">I'm already retired</option>
+          <option value="1_2_years">1–2 years</option>
+          <option value="3_5_years">3–5 years</option>
+          <option value="5_plus_years">5+ years</option>
+          <option value="just_exploring">Just exploring for now</option>
+        </select>
+        <button class="lead-btn" type="submit">Request Information →</button>
+        <p class="lead-privacy">We respect your privacy. No spam, ever. Unsubscribe any time.</p>
+      </form>
+    </div>
+
+    <div id="lead-success" style="display:none" class="lead-success">
+      <div class="lead-success-icon">✦</div>
+      <h3 class="lead-success-title">You're on the list.</h3>
+      <p class="lead-success-sub">We'll be in touch with updates on residences, pricing, and community life ahead of our 2028–2029 opening.</p>
+    </div>
+  </div>
+
+  <div class="lead-stats">
+    <div class="lead-stat">
+      <span class="lead-stat-label">Opening</span>
+      <span class="lead-stat-val">2028–2029</span>
+    </div>
+    <div class="lead-stat">
+      <span class="lead-stat-label">Location</span>
+      <span class="lead-stat-val">Punta Cana</span>
+    </div>
+    <div class="lead-stat">
+      <span class="lead-stat-label">From</span>
+      <span class="lead-stat-val">$3,500 / mo</span>
+    </div>
+  </div>
+</div>
+
 <!-- CTA -->
 <div class="cta-section">
   <div style="max-width:640px;margin:0 auto">
@@ -519,5 +616,34 @@ body{background:#fff;color:var(--carbon);font-family:var(--ff-sans);font-size:16
   </div>
 </div>
 
+<script>
+var form = document.getElementById('leadForm');
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.lead-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        document.getElementById('lead-form-wrap').style.display = 'none';
+        document.getElementById('lead-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Request Information →';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us at info@seniorlivingdr.com');
+      }
+    }).catch(function() {
+      btn.textContent = 'Request Information →';
+      btn.disabled = false;
+      alert('Something went wrong. Please email us at info@seniorlivingdr.com');
+    });
+  });
+}
+</script>
 </body>
 </html>
