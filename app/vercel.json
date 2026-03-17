@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/", "destination": "/blog/index.html" },
     { "source": "/blog/retiring-in-dominican-republic", "destination": "/blog/retiring-in-dominican-republic.html" }
   ]
 }

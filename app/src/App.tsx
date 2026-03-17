@@ -382,7 +382,7 @@ function App() {
           <a href="#strategy" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
             Strategy
           </a>
-          <a href="/blog/" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
+          <a href="/blog/index.html" className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors link-underline">
             Journal
           </a>
           <a href="/investors.html" className="font-mono text-xs uppercase tracking-[0.12em] px-4 py-2 bg-[#b8953e] text-white hover:bg-[#c9a54a] transition-colors rounded-sm">
@@ -409,7 +409,7 @@ function App() {
               <a href="#strategy" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Strategy
               </a>
-              <a href="/blog/" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
+              <a href="/blog/index.html" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
                 Journal
               </a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-black/5">
